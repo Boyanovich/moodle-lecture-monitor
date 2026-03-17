@@ -1,13 +1,20 @@
-# Moodle lecture monitor
+# Moodle Lecture Monitor
 
-I wrote this script because checking the university e-learning portal for new files every day was driving me crazy. It uses Selenium to check for new course materials, bypasses the annoying Amanote iframe popups, downloads the latest PDF/PPTX, and uses OpenRouter's API (Trinity model) to summarize the text and ping a Telegram bot.
+This script automates the monitoring, downloading, and summarizing of course materials from a Moodle e-learning portal.
+
+## Features
+
+* Continually monitors Moodle for new lecture files (PDF/PPTX).
+* Bypasses Moodle iframe plugins (e.g., Amanote) to extract direct file download links.
+* Extracts raw text from downloaded presentations.
+* Uses the OpenRouter API (Trinity model) to generate a brief summary of the lecture content.
+* Sends the lecture title and AI summary as a notification to a Telegram bot.
+* Maintains a local log (`processed_lectures.txt`) to prevent duplicate processing.
 
 ## Setup & Run
 
-Make sure you have Google Chrome installed on your system.
-
-1. `pip install -r requirements.txt`
-2. Put your Moodle credentials, OpenRouter API key, and Telegram bot tokens inside the `CONFIGURATION` block in `moodle_parser.py`.
-3. Run `python moodle_parser.py`. 
-
-The script runs in a continuous loop (checks every 15 minutes by default). It saves the URLs of processed lectures locally in `processed_lectures.txt` so it won't spam you with the same summary twice.
+1. Install required dependencies: 
+   `pip install -r requirements.txt`
+2. Update the `CONFIGURATION` block inside `moodle_parser.py` with your Moodle credentials, OpenRouter API key, and Telegram bot tokens.
+3. Execute the script: 
+   `python moodle_parser.py`
