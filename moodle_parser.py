@@ -16,7 +16,7 @@ PASSWORD = "YOUR_PASSWORD"
 TARGET_URL = "https://elearning.unime.it/course/view.php?id=395" # Replace with your specific course URL
 
 OPENROUTER_API_KEY = "YOUR_OPENROUTER_API_KEY"
-AI_MODEL = "arcee-ai/trinity-large-preview:free" 
+AI_MODEL = "stealth/space-bunny-alpha" 
 
 TELEGRAM_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
 TELEGRAM_CHAT_ID = "YOUR_TELEGRAM_CHAT_ID"
@@ -142,7 +142,14 @@ def ask_openrouter(text):
         "Content-Type": "application/json"
     }
     
-    prompt = f"Summarize the following university lecture in simple terms, highlighting 3 main points. Respond in Russian:\n\n{text[:4000]}"
+    prompt = (
+        "You are a strict academic assistant. Summarize the following university lecture into exactly 3 key points.\n"
+        "Strict rules:\n"
+        "1. Output MUST be in English.\n"
+        "2. Use plain text ONLY. Do NOT use markdown, asterisks (**), or bold text.\n"
+        "3. Start your response directly with the number '1.'. Do NOT output any conversational filler.\n\n"
+        f"Lecture text:\n{text[:4000]}"
+    )
     
     data = {
         "model": AI_MODEL,
